@@ -21,5 +21,3 @@ Sigue estos pasos para levantar el entorno de desarrollo en tu equipo:
    ```bash
    git clone [https://github.com/Mikey0o/Proyecto-OnePiece-General.git](https://github.com/Mikey0o/Proyecto-OnePiece-General.git)
    cd Proyecto-OnePiece-General
-
-hola
