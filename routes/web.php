@@ -58,4 +58,13 @@ Route::middleware('auth')->group(function () {
     // Bitácora de accesos (RNF08).
     Route::get('/bitacora', [BitacoraController::class, 'listar'])
         ->middleware('permiso:BITACORA.VER')->name('bitacora.index');
+      
+    // PROVISIONAL (Karen Bayona): página de prueba de ubicaciones
+    Route::view('/ubicaciones/prueba', 'ubicaciones.prueba')
+        ->middleware('permiso:NAVEGACION.VER');
+
+    // PROVISIONAL (Karen Bayona): borrar cuando llegue el controller real de ubicaciones
+    Route::put('/ubicaciones/{tipo}/{id}', function (\App\Http\Requests\UbicacionRequest $request) {
+        return response()->json(['ok' => true, 'datos' => $request->validated()]);
+    })->middleware('permiso:NAVEGACION.EDITAR');
 });
