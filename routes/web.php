@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TripulacionController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BitacoraController;
 use App\Http\Controllers\MapaController;
@@ -58,4 +59,16 @@ Route::middleware('auth')->group(function () {
     // Bitácora de accesos (RNF08).
     Route::get('/bitacora', [BitacoraController::class, 'listar'])
         ->middleware('permiso:BITACORA.VER')->name('bitacora.index');
+
+    // Tripulaciones (RF01-RF05). Controlador: Sebastián.
+    Route::get('/tripulaciones', [TripulacionController::class, 'index'])
+        ->middleware('permiso:TRIPULACIONES.VER')->name('tripulaciones.index');
+    Route::get('/tripulaciones/{id}', [TripulacionController::class, 'show'])
+        ->whereNumber('id')->middleware('permiso:TRIPULACIONES.VER')->name('tripulaciones.show');
+    Route::post('/tripulaciones', [TripulacionController::class, 'store'])
+        ->middleware('permiso:TRIPULACIONES.CREAR')->name('tripulaciones.store');
+    Route::put('/tripulaciones/{id}', [TripulacionController::class, 'update'])
+        ->whereNumber('id')->middleware('permiso:TRIPULACIONES.EDITAR')->name('tripulaciones.update');
+    Route::delete('/tripulaciones/{id}', [TripulacionController::class, 'destroy'])
+        ->whereNumber('id')->middleware('permiso:TRIPULACIONES.EDITAR')->name('tripulaciones.destroy');
 });
