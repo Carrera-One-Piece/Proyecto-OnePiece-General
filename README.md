@@ -17,7 +17,8 @@ Bienvenido al repositorio central de desarrollo - Carrera de la gran ruta hacia 
 
 Sigue estos pasos para levantar el entorno de desarrollo en tu equipo:
 
-1. **Clonar el repositorio:**
-   ```bash
-   git clone [https://github.com/Mikey0o/Proyecto-OnePiece-General.git](https://github.com/Mikey0o/Proyecto-OnePiece-General.git)
-   cd Proyecto-OnePiece-General
+### 1. Clonar el repositorio
+
+**Vía HTTPS:**
+```bash
+git clone [https://github.com/Carrera-One-Piece/Proyecto-OnePiece-General.git](https://github.com/Carrera-One-Piece/Proyecto-OnePiece-General.git)
