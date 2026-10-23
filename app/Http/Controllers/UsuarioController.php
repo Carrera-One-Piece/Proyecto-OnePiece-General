@@ -56,6 +56,16 @@ class UsuarioController extends Controller
             );
         }
 
+        // Buscar por nombre o correo
+        if ($request->filled('q')) {
+            $texto = '%'.$request->q.'%';
+
+            $query->where(function ($q) use ($texto) {
+                $q->where('usuarios.Nombre', 'like', $texto)
+                    ->orWhere('usuarios.Correo', 'like', $texto);
+            });
+        }
+
         $usuarios = $query
             ->orderBy('usuarios.Nombre')
             ->paginate(10)
@@ -63,9 +73,14 @@ class UsuarioController extends Controller
 
         $roles = Rol::orderBy('Nombre_rol')->get();
 
+        // Para el botón "Pendientes (N)"
+        $totalPendientes = DB::table('usuarios')
+            ->where('Estado', 'Pendiente')
+            ->count();
+
         return view(
             'usuarios.index',
-            compact('usuarios', 'roles')
+            compact('usuarios', 'roles', 'totalPendientes')
         );
     }
 
@@ -296,11 +311,20 @@ class UsuarioController extends Controller
     {
         $admin = Auth::user();
 
+        // El nombre y el correo, para que en la bitácora no salga solo un número.
+        $afectado = DB::table('usuarios')
+            ->where('ID_usuario', $idAfectado)
+            ->first(['Nombre', 'Correo']);
+
+        $quien = $afectado
+            ? "{$afectado->Nombre} ({$afectado->Correo})"
+            : "#{$idAfectado}";
+
         Bitacora::registrar(
             $accion,
             $admin?->ID_usuario,
             $admin?->Correo,
-            trim("Usuario afectado: {$idAfectado}. ".($detalle ?? ''))
+            trim("Usuario afectado: {$quien}. ".($detalle ?? ''))
         );
     }
 }

@@ -25,6 +25,9 @@
 
     <ul class="menu">
         <li><a href="{{ url('/mapa') }}">Mapa de navegación</a></li>
+        @can('RECOMPENSAS.VER')
+            <li><a href="{{ route('recompensas.index') }}">Tablón de recompensas</a></li>
+        @endcan
         @can('USUARIOS.VER')
             <li><a href="{{ route('usuarios.index') }}">Administrar usuarios</a></li>
             <li><a href="{{ route('roles.permisos') }}">Matriz de permisos</a></li>
