@@ -19,7 +19,8 @@ class RolPermisoController extends Controller
      */
     public function listar(Request $request)
     {
-        $roles = Rol::orderBy('Nombre_rol')->get();
+        // permisos_count = cuántos permisos tiene cada rol (se muestra en las pestañas).
+        $roles = Rol::withCount('permisos')->orderBy('Nombre_rol')->get();
 
         $rolSeleccionado = null;
         $permisosAsignados = collect();

@@ -179,6 +179,7 @@ debe salir "Acceso denegado".
 | `app/Http/Controllers/AuthController.php` | A | Login, registro, pendiente, cerrar sesión |
 | `resources/views/layouts/auth.blade.php`, `auth/*`, `inicio.blade.php` | A | Pantallas (diseño de la rebanada A) |
 | `public/css/tema.css` | A | Colores por organización |
+| `resources/views/layouts/panel.blade.php`, `public/css/panel.css` | — | Marco de las pantallas de adentro (usuarios, permisos, bitácora, recompensas): barra con menú según el rol, tablas, botones. Usa los colores de `tema.css` |
 | `app/Http/Middleware/VerificarPermiso.php` | B | El guardia `permiso:MODULO.ACCION` |
 | `app/Providers/AppServiceProvider.php` | B | `@can` / `Gate`, y los avisos de login que van a la bitácora |
 | `app/Models/Bitacora.php`, `BitacoraController.php`, `bitacora/index.blade.php` | B | Bitácora y su consulta |

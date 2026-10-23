@@ -38,6 +38,11 @@ class RolSeeder extends Seeder
                 'Nombre_rol' => 'Experto en Seguridad de Información',
                 'Descripcion' => 'Protege datos clasificados.',
             ],
+            // Módulo de Recompensas: rol nuevo pedido por el CTO.
+            [
+                'Nombre_rol' => 'Gestor de Recompensas',
+                'Descripcion' => 'Crea, consulta, edita y elimina las recompensas.',
+            ],
         ];
 
         foreach ($roles as $rol) {

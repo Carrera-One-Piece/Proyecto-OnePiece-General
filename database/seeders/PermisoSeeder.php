@@ -48,13 +48,17 @@ class PermisoSeeder extends Seeder
             'INFORMES' => ['VER', 'CREAR'], 'DASHBOARD' => self::CRUD, 'USUARIOS' => ['VER'],
         ],
         'Director de Inteligencia Cipher Pol' => [
-            'TRIPULACIONES' => self::CRUD, 'ORDENES_CAPTURA' => self::CRUD, 'NAVEGACION' => ['VER'],
+            'TRIPULACIONES' => self::CRUD, 'RECOMPENSAS' => ['VER'], 'ORDENES_CAPTURA' => self::CRUD, 'NAVEGACION' => ['VER'],
             'EVENTOS' => ['VER'], 'ALIANZAS' => self::CRUD, 'AMENAZAS' => ['VER'],
             'INFORMES' => self::CRUD, 'DASHBOARD' => ['VER'],
         ],
         'Analista de Recompensas' => [
             'TRIPULACIONES' => ['VER'], 'RECOMPENSAS' => self::CRUD, 'ALIANZAS' => ['VER'],
             'AMENAZAS' => self::CRUD, 'INFORMES' => ['VER'], 'DASHBOARD' => ['VER'],
+        ],
+        // Módulo de Recompensas: rol nuevo del CTO (CRUD de recompensas + ver tripulaciones).
+        'Gestor de Recompensas' => [
+            'TRIPULACIONES' => ['VER'], 'RECOMPENSAS' => self::CRUD,
         ],
         'Especialista en Navegación de Grand Line' => [
             'TRIPULACIONES' => ['VER'], 'NAVEGACION' => self::CRUD, 'EVENTOS' => self::CRUD,
