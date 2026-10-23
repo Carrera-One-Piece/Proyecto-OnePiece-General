@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BitacoraController;
+use App\Http\Controllers\EventoController;
 use App\Http\Controllers\MapaController;
 use App\Http\Controllers\RolPermisoController;
 use App\Http\Controllers\UbicacionController;
@@ -68,4 +69,19 @@ Route::middleware('auth')->group(function () {
     // Reemplaza el cierre provisional de Karen por el controller real.
     Route::put('/ubicaciones/{tipo}/{id}', [UbicacionController::class, 'actualizar'])
         ->middleware('permiso:NAVEGACION.EDITAR');
+
+    // Módulo Eventos (RF13-RF15).
+    // Página de prueba para verificar el CRUD a ojo (borrar cuando haya interfaz real).
+    Route::view('/eventos/prueba', 'eventos.prueba')
+        ->middleware('permiso:EVENTOS.VER')->name('eventos.prueba');
+    Route::get('/eventos', [EventoController::class, 'index'])
+        ->middleware('permiso:EVENTOS.VER')->name('eventos.index');
+    Route::get('/eventos/{id}', [EventoController::class, 'show'])
+        ->whereNumber('id')->middleware('permiso:EVENTOS.VER')->name('eventos.show');
+    Route::post('/eventos', [EventoController::class, 'store'])
+        ->middleware('permiso:EVENTOS.CREAR')->name('eventos.store');
+    Route::put('/eventos/{id}', [EventoController::class, 'update'])
+        ->whereNumber('id')->middleware('permiso:EVENTOS.EDITAR')->name('eventos.update');
+    Route::delete('/eventos/{id}', [EventoController::class, 'destroy'])
+        ->whereNumber('id')->middleware('permiso:EVENTOS.ELIMINAR')->name('eventos.destroy');
 });
