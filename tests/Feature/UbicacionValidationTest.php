@@ -33,6 +33,11 @@ class UbicacionValidationTest extends TestCase
 
             DB::table($tabla)->insert(['Nombre' => 'Prueba']); // queda con ID 1
         }
+
+        // Tabla donde el controlador guarda la ubicación (la usan los tests que aceptan datos).
+        $this->artisan('migrate', [
+            '--path' => 'database/migrations/2026_10_19_000001_create_ubicacion_actual_table.php',
+        ]);
     }
 
     public function test_acepta_una_ubicacion_valida(): void
