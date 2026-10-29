@@ -25,6 +25,26 @@ class Bitacora extends Model
     public const USUARIO_SUSPENDIDO = 'USUARIO_SUSPENDIDO';
     public const PERMISOS_CAMBIADOS = 'PERMISOS_CAMBIADOS';
 
+    // Cómo se muestra cada acción en la pantalla de la bitácora, y su color
+    // (ok = verde, alerta = rojo, cambio = color del tema, neutro = gris).
+    // Las RECOMPENSA_* las escribe AuditoriaRecompensa::anotarEnBitacora().
+    public const ETIQUETAS = [
+        self::LOGIN_OK => ['Inicio de sesión', 'ok'],
+        self::LOGIN_FALLIDO => ['Intento fallido', 'alerta'],
+        self::LOGOUT => ['Cierre de sesión', 'neutro'],
+        self::REGISTRO => ['Registro nuevo', 'neutro'],
+        self::ACCESO_DENEGADO => ['Acceso denegado', 'alerta'],
+        self::USUARIO_APROBADO => ['Usuario aprobado', 'cambio'],
+        self::USUARIO_RECHAZADO => ['Usuario rechazado', 'cambio'],
+        self::USUARIO_SUSPENDIDO => ['Usuario suspendido', 'alerta'],
+        self::PERMISOS_CAMBIADOS => ['Permisos cambiados', 'cambio'],
+        AuditoriaRecompensa::BITACORA_CREADA => ['Recompensa emitida', 'cambio'],
+        AuditoriaRecompensa::BITACORA_AUMENTADA => ['Recompensa aumentada', 'cambio'],
+        AuditoriaRecompensa::BITACORA_EDITADA => ['Recompensa corregida', 'cambio'],
+        AuditoriaRecompensa::BITACORA_CANCELADA => ['Recompensa cancelada', 'cambio'],
+        AuditoriaRecompensa::BITACORA_ELIMINADA => ['Recompensa borrada', 'alerta'],
+    ];
+
     protected $table = 'bitacora_accesos';
 
     protected $primaryKey = 'ID_bitacora';
@@ -50,6 +70,17 @@ class Bitacora extends Model
     public function usuario(): BelongsTo
     {
         return $this->belongsTo(Usuario::class, 'ID_usuario', 'ID_usuario');
+    }
+
+    // En la vista: {{ $registro->etiqueta() }} y class="estado--{{ $registro->color() }}"
+    public function etiqueta(): string
+    {
+        return self::ETIQUETAS[$this->Accion][0] ?? $this->Accion;
+    }
+
+    public function color(): string
+    {
+        return self::ETIQUETAS[$this->Accion][1] ?? 'neutro';
     }
 
     /**

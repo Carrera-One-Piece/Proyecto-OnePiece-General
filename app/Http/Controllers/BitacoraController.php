@@ -22,7 +22,7 @@ class BitacoraController extends Controller
             'hasta.after_or_equal' => 'La fecha "hasta" no puede ser anterior a "desde".',
         ]);
 
-        $consulta = Bitacora::query()->orderByDesc('Fecha')->orderByDesc('ID_bitacora');
+        $consulta = Bitacora::with('usuario')->orderByDesc('Fecha')->orderByDesc('ID_bitacora');
 
         if ($request->filled('correo')) {
             $consulta->where('Correo_intento', 'like', '%'.$request->correo.'%');
@@ -42,11 +42,8 @@ class BitacoraController extends Controller
 
         return view('bitacora.index', [
             'registros' => $consulta->paginate(20)->withQueryString(),
-            'acciones' => [
-                Bitacora::LOGIN_OK, Bitacora::LOGIN_FALLIDO, Bitacora::LOGOUT, Bitacora::REGISTRO,
-                Bitacora::ACCESO_DENEGADO, Bitacora::USUARIO_APROBADO, Bitacora::USUARIO_RECHAZADO,
-                Bitacora::USUARIO_SUSPENDIDO, Bitacora::PERMISOS_CAMBIADOS,
-            ],
+            // Código => texto, para el filtro "Acción".
+            'acciones' => array_map(fn ($etiqueta) => $etiqueta[0], Bitacora::ETIQUETAS),
         ]);
     }
 }
