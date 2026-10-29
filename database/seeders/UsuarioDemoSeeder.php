@@ -23,6 +23,7 @@ class UsuarioDemoSeeder extends Seeder
             ['almirante@marina.gov', 'Almirante Daigo Renn', 'Almirante de la Marina', 'Marina', Usuario::ESTADO_ACTIVO],
             ['director@cipherpol.gov', 'Director Sayo Kurane', 'Director de Inteligencia Cipher Pol', 'Cipher Pol', Usuario::ESTADO_ACTIVO],
             ['gestor@marina.gov', 'Gestor Kobe Arashi', 'Gestor de Recompensas', 'Marina', Usuario::ESTADO_ACTIVO],
+            ['navegacion@marina.gov', 'Especialista Navegante Demo', 'Especialista en Navegación de Grand Line', 'Marina', Usuario::ESTADO_ACTIVO],
             ['pendiente@gobierno.gov', 'Consejero Orlan Vesk', null, 'Gobierno Afiliado', Usuario::ESTADO_PENDIENTE],
         ];
 
