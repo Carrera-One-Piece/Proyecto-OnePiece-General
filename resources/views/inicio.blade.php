@@ -35,6 +35,14 @@
         @can('BITACORA.VER')
             <li><a href="{{ route('bitacora.index') }}">Bitácora de accesos</a></li>
         @endcan
+        @if (auth()->user()->rol?->permisos()
+    ->where('Nombre_permiso', 'INFORMES.VER')->exists())
+
+    <a href="{{ route('inteligencia.reportes.index') }}">
+        Centro de Inteligencia Mundial
+    </a>
+
+@endif
     </ul>
 
     <form action="{{ route('logout') }}" method="post">

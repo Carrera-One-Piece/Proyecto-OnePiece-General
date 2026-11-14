@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\ReporteEstrategicoController;
+use App\Http\Controllers\InformeInteligenciaController;
+use App\Http\Controllers\ReporteInteligenciaController;
 use App\Http\Controllers\TripulacionController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BitacoraController;
@@ -39,8 +42,28 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::view('/inicio', 'inicio')->name('inicio');
+    // Centro de Inteligencia Mundial: informes consolidados.
+    Route::get('/inteligencia/informes', [InformeInteligenciaController::class, 'index'])
+        ->middleware('permiso:INFORMES.VER')
+        ->name('inteligencia.informes.index');
 
-    // Administrar usuarios (RF27). Solo el Experto en Seguridad puede cambiar cosas.
+    Route::get('/inteligencia/informes/crear', [InformeInteligenciaController::class, 'create'])
+        ->middleware('permiso:INFORMES.CREAR')
+        ->name('inteligencia.informes.create');
+
+    Route::post('/inteligencia/informes', [InformeInteligenciaController::class, 'store'])
+        ->middleware('permiso:INFORMES.CREAR')
+        ->name('inteligencia.informes.store');
+
+    Route::get('/inteligencia/informes/{id}', [InformeInteligenciaController::class, 'show'])
+        ->whereNumber('id')
+        ->middleware('permiso:INFORMES.VER')
+        ->name('inteligencia.informes.show');
+
+            Route::get('/inteligencia/estrategico', [ReporteEstrategicoController::class, 'index'])
+        ->middleware('permiso:INFORMES.VER')
+        ->name('inteligencia.estrategico.index');
+
     Route::get('/usuarios', [UsuarioController::class, 'listar'])
         ->middleware('permiso:USUARIOS.VER')->name('usuarios.index');
     Route::get('/usuarios/pendientes', [UsuarioController::class, 'pendientes'])
@@ -53,7 +76,6 @@ Route::middleware('auth')->group(function () {
         ->whereNumber('id')->middleware('permiso:USUARIOS.EDITAR')->name('usuarios.rechazar');
     Route::patch('/usuarios/{id}/suspender', [UsuarioController::class, 'suspender'])
         ->whereNumber('id')->middleware('permiso:USUARIOS.EDITAR')->name('usuarios.suspender');
-
     // Matriz de permisos por rol.
     Route::get('/roles/permisos', [RolPermisoController::class, 'listar'])
         ->middleware('permiso:USUARIOS.VER')->name('roles.permisos');
@@ -96,7 +118,6 @@ Route::middleware('auth')->group(function () {
         ->whereNumber('id')->middleware('permiso:TRIPULACIONES.EDITAR')->name('tripulaciones.update');
     Route::delete('/tripulaciones/{id}', [TripulacionController::class, 'destroy'])
         ->whereNumber('id')->middleware('permiso:TRIPULACIONES.EDITAR')->name('tripulaciones.destroy');
-});
     // Módulo Navegación (RF11-RF12).
     // Página de prueba de Karen: se deja tal cual, solo para validar a ojo.
     Route::view('/ubicaciones/prueba', 'ubicaciones.prueba')
@@ -120,4 +141,18 @@ Route::middleware('auth')->group(function () {
         ->whereNumber('id')->middleware('permiso:EVENTOS.EDITAR')->name('eventos.update');
     Route::delete('/eventos/{id}', [EventoController::class, 'destroy'])
         ->whereNumber('id')->middleware('permiso:EVENTOS.ELIMINAR')->name('eventos.destroy');
+
+    // Módulo Inteligencia (RF16-RF20).
+    // Centro de Inteligencia Mundial: reportes recibidos.
+    Route::get('/inteligencia/reportes', [ReporteInteligenciaController::class, 'index'])
+        ->middleware('permiso:INFORMES.VER')
+        ->name('inteligencia.reportes.index');
+
+    Route::get('/inteligencia/reportes/crear', [ReporteInteligenciaController::class, 'create'])
+        ->middleware('permiso:INFORMES.CREAR')
+        ->name('inteligencia.reportes.create');
+
+    Route::post('/inteligencia/reportes', [ReporteInteligenciaController::class, 'store'])
+        ->middleware('permiso:INFORMES.CREAR')
+        ->name('inteligencia.reportes.store');
 });

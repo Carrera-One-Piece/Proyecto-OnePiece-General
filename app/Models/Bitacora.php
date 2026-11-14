@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Log;
  */
 class Bitacora extends Model
 {
+ public const REPORTE_INTELIGENCIA_CREADO = 'REPORTE_INTELIGENCIA_CREADO';
+public const INFORME_INTELIGENCIA_CREADO = 'INFORME_INTELIGENCIA_CREADO';
     public const LOGIN_OK = 'LOGIN_OK';
     public const LOGIN_FALLIDO = 'LOGIN_FALLIDO';
     public const LOGOUT = 'LOGOUT';
@@ -38,6 +40,8 @@ class Bitacora extends Model
         self::USUARIO_RECHAZADO => ['Usuario rechazado', 'cambio'],
         self::USUARIO_SUSPENDIDO => ['Usuario suspendido', 'alerta'],
         self::PERMISOS_CAMBIADOS => ['Permisos cambiados', 'cambio'],
+        self::REPORTE_INTELIGENCIA_CREADO => ['Reporte de inteligencia creado', 'cambio'],
+self::INFORME_INTELIGENCIA_CREADO => ['Informe consolidado creado', 'cambio'],
         AuditoriaRecompensa::BITACORA_CREADA => ['Recompensa emitida', 'cambio'],
         AuditoriaRecompensa::BITACORA_AUMENTADA => ['Recompensa aumentada', 'cambio'],
         AuditoriaRecompensa::BITACORA_EDITADA => ['Recompensa corregida', 'cambio'],
