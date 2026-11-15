@@ -1,0 +1,106 @@
+/* Estilos del módulo de Inteligencia dentro del panel compartido. */
+
+.panel .inteligencia .encabezado-seccion {
+    align-items: center;
+    margin-bottom: 22px;
+}
+
+.panel .inteligencia .encabezado-seccion > div {
+    min-width: 0;
+    flex: 1 1 320px;
+}
+
+.panel .inteligencia .encabezado-seccion .subtitulo {
+    margin-bottom: 0;
+}
+
+.panel .inteligencia .encabezado-seccion > .boton {
+    flex: 0 1 auto;
+    margin: 0;
+}
+
+.panel .inteligencia .pestanas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(223, 197, 139, .25);
+}
+
+.panel .inteligencia .pestanas a {
+    padding: 10px 16px;
+    border-radius: 5px;
+}
+
+.panel .inteligencia-tabla {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 6px;
+}
+
+.panel .inteligencia-tabla .tabla {
+    display: table;
+    min-width: 760px;
+}
+
+.panel .inteligencia-tabla .tabla td {
+    vertical-align: top;
+}
+
+.panel .inteligencia-contenido {
+    min-width: 250px;
+    max-width: 450px;
+    overflow-wrap: anywhere;
+}
+
+.panel .inteligencia-contenido > strong {
+    color: #f3efe2;
+    line-height: 1.5;
+}
+
+.panel .inteligencia-detalle {
+    margin-top: 10px;
+}
+
+.panel .inteligencia-detalle summary {
+    width: fit-content;
+    color: var(--oro, #dfc58b);
+    font-size: .85rem;
+    cursor: pointer;
+}
+
+.panel .inteligencia-texto {
+    margin: 12px 0 0;
+    padding: 14px;
+    border-left: 2px solid var(--oro, #dfc58b);
+    border-radius: 0 4px 4px 0;
+    background: rgba(31, 53, 68, .5);
+    color: #dce7ed;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    line-height: 1.7;
+}
+
+.panel .inteligencia-fecha {
+    white-space: nowrap;
+    color: #b8cbd7;
+    font-variant-numeric: tabular-nums;
+    font-size: .85rem;
+}
+
+.panel .inteligencia-tabla:focus-visible,
+.panel .inteligencia-detalle summary:focus-visible {
+    outline: 3px solid var(--oro, #dfc58b);
+    outline-offset: 3px;
+}
+
+@media (max-width: 560px) {
+    .panel .inteligencia .encabezado-seccion > .boton {
+        width: 100%;
+    }
+
+    .panel .inteligencia .pestanas a {
+        flex: 1 1 100%;
+        text-align: center;
+    }
+}
