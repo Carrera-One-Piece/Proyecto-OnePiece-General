@@ -27,11 +27,13 @@
     </p>
 
     <ul class="menu">
-        <li>
-            <a href="{{ url('/mapa') }}">
-                Mapa de navegación
-            </a>
-        </li>
+        @can('NAVEGACION.VER')
+            <li>
+                <a href="{{ route('mapa') }}">
+                    Mapa de navegación
+                </a>
+            </li>
+        @endcan
 
         @can('RECOMPENSAS.VER')
             <li>

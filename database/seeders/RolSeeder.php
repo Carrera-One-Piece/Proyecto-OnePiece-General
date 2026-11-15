@@ -38,6 +38,11 @@ class RolSeeder extends Seeder
                 'Nombre_rol' => 'Experto en Seguridad de Información',
                 'Descripcion' => 'Protege datos clasificados.',
             ],
+            // Rol general de consulta pedido por el CTO (14/11): solo revisa información.
+            [
+                'Nombre_rol' => 'Marina',
+                'Descripcion' => 'Usuario general de la Marina: solo consulta información.',
+            ],
             // Módulo de Recompensas: rol nuevo pedido por el CTO.
             [
                 'Nombre_rol' => 'Gestor de Recompensas',

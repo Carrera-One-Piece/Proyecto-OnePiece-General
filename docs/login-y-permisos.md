@@ -80,6 +80,7 @@ y las demás pantallas no lo necesitan. El mapa sale vacío mientras la tabla `i
 | `seguridad@marina.gov` | Experto en Seguridad | Activo | Entra y ve usuarios, matriz y bitácora |
 | `almirante@marina.gov` | Almirante | Activo | Ve la lista de usuarios, pero al aprobar sale 403 |
 | `director@cipherpol.gov` | Director Cipher Pol | Activo | Si escribe `/usuarios` a mano, sale 403 |
+| `marina@marina.gov` | Marina (usuario general) | Activo | Solo consulta: mapa, tripulaciones, recompensas y eventos. No puede crear ni editar |
 | `pendiente@gobierno.gov` | (sin rol) | Pendiente | No lo deja entrar: "pendiente de aprobación" |
 
 ### Recorrido para la demo

@@ -61,6 +61,7 @@ class UbicacionController extends Controller
                 'ID_entidad'   => $datos['id'],
             ],
             [
+                'ID_isla'              => $datos['isla'] ?? null,
                 'Coordenada_X'         => $datos['x'],
                 'Coordenada_Y'         => $datos['y'],
                 'Fecha_actualizacion'  => now(),

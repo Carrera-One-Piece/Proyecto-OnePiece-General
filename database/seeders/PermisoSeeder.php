@@ -71,6 +71,13 @@ class PermisoSeeder extends Seeder
         'Experto en Seguridad de Información' => [
             'USUARIOS' => self::CRUD, 'BITACORA' => ['VER'],
         ],
+        // Rol general de consulta pedido por el CTO: solo VER, nada de crear, editar ni borrar.
+        // Ve el mapa, tripulaciones, recompensas, eventos y el dashboard; no la
+        // inteligencia (informes, alianzas, amenazas, órdenes de captura) ni usuarios.
+        'Marina' => [
+            'TRIPULACIONES' => ['VER'], 'RECOMPENSAS' => ['VER'], 'NAVEGACION' => ['VER'],
+            'EVENTOS' => ['VER'], 'DASHBOARD' => ['VER'],
+        ],
         // Sin requerimientos en el IEEE: queda sin permisos hasta que el Product Owner decida.
         'Desarrollador de Sistemas de Monitoreo' => [],
     ];

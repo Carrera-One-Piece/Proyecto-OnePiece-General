@@ -21,6 +21,7 @@ dice qué rol lo usa.
 | Administrador de Bases Navales | ver | — | ver | ver | ver | — | — | ver | ver | — | — |
 | Experto en Seguridad | — | — | — | — | — | — | — | — | — | **CRUD** | ver |
 | Desarrollador de Monitoreo | — | — | — | — | — | — | — | — | — | — | — |
+| Marina (usuario general) | ver | ver | — | ver | ver | — | — | — | ver | — | — |
 
 En el sistema cada casilla se guarda como un permiso `MODULO.ACCION` (por ejemplo
 `TRIPULACIONES.CREAR`). Son **41 permisos**: 10 módulos × 4 acciones, más `BITACORA.VER`.
@@ -36,6 +37,7 @@ En el sistema cada casilla se guarda como un permiso `MODULO.ACCION` (por ejempl
 | Administrador de Bases Navales | Aparece como rol secundario en varios casos de uso → todo de solo lectura |
 | Experto en Seguridad | RF27 (roles y permisos) + la bitácora (RNF08) |
 | Desarrollador de Monitoreo | Ninguno en el IEEE |
+| Marina (usuario general) | Ninguno: rol de solo consulta pedido por el CTO (14/11). Ve el mapa, tripulaciones, recompensas, eventos y el dashboard. No ve inteligencia ni usuarios |
 
 RF09 (recompensas automáticas), RF10 (mapa) y RF23 (dashboard) el IEEE los marca como
 "proceso automático del sistema": no los ejecuta ningún rol, aunque alguien tenga que poder verlos.
