@@ -1,0 +1,444 @@
+/* Login e inicio. Los colores de cada organización vienen de tema.css. */
+
+.acceso-shell {
+    display: contents;
+}
+
+body.interfaz-naval {
+    --oro: #dfc58b;
+    --texto-claro: #f3efe2;
+    --texto-secundario: #bac8d7;
+
+    margin: 0;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 36px 20px;
+    color: var(--texto-claro);
+    font-family: "Segoe UI", system-ui, sans-serif;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(6, 21, 46, .12),
+            rgba(6, 21, 46, .06) 50%,
+            rgba(6, 21, 46, .12)
+        ),
+        url("../img/fondo-naval.png") center / cover no-repeat;
+
+    background-color: var(--fondo-1);
+    background-attachment: fixed;
+}
+
+.interfaz-naval *,
+.interfaz-naval *::before,
+.interfaz-naval *::after {
+    box-sizing: border-box;
+}
+
+/* Panel central */
+
+.interfaz-naval .acceso-shell {
+    display: block;
+    position: relative;
+    width: 100%;
+    max-width: 410px;
+    padding: 28px 32px 32px;
+
+    background:
+        linear-gradient(
+            115deg,
+            rgba(255, 255, 255, .07),
+            transparent 48%
+        ),
+        rgba(5, 13, 23, .95);
+
+    border: 1px solid var(--oro);
+    border-radius: 10px 10px 32px 10px;
+
+    box-shadow:
+        0 22px 70px rgba(0, 0, 0, .7),
+        0 0 28px rgba(110, 199, 214, .12);
+}
+
+.interfaz-naval .acceso-shell::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 1px solid rgba(130, 186, 199, .4);
+    border-radius: 5px 5px 27px 5px;
+    pointer-events: none;
+}
+
+/* Encabezado */
+
+.interfaz-naval .encabezado {
+    margin: 0 0 24px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid rgba(223, 197, 139, .25);
+    text-align: center;
+}
+
+.interfaz-naval .emblema {
+    width: 68px;
+    height: 68px;
+    color: var(--oro);
+    filter: drop-shadow(0 0 12px rgba(223, 197, 139, .18));
+}
+
+.interfaz-naval .encabezado h1 {
+    margin: 14px 0 8px;
+    color: var(--texto-claro);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.25rem;
+    line-height: 1.35;
+    letter-spacing: .035em;
+    text-transform: uppercase;
+}
+
+.interfaz-naval .encabezado .lema {
+    margin: 0;
+    color: var(--oro);
+    font-size: .65rem;
+    line-height: 1.8;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    opacity: 1;
+}
+
+.interfaz-naval .identificador-sistema {
+    margin: 8px 0 0;
+    color: var(--texto-secundario);
+    font-size: .65rem;
+    line-height: 1.6;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+}
+
+/* Anula el rectángulo claro y el borde azul de tema.css */
+
+.interfaz-naval .expediente {
+    position: relative;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    color: var(--texto-claro);
+}
+
+.interfaz-naval .expediente h2 {
+    margin: 0 0 8px;
+    color: var(--texto-claro);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.35rem;
+    line-height: 1.4;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+.interfaz-naval .expediente .subtitulo {
+    margin: 0 0 24px;
+    color: var(--texto-secundario);
+    font-size: .82rem;
+    line-height: 1.6;
+    text-align: center;
+}
+
+.interfaz-naval .expediente p {
+    line-height: 1.6;
+}
+
+/* Formulario */
+
+.interfaz-naval label {
+    display: block;
+    margin: 20px 0 7px;
+    color: var(--oro);
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+}
+
+.interfaz-naval input[type="text"],
+.interfaz-naval input[type="email"],
+.interfaz-naval input[type="password"],
+.interfaz-naval select {
+    width: 100%;
+    min-height: 46px;
+    padding: 12px 14px;
+    border: 1px solid #80b3c2;
+    border-radius: 5px;
+    background: linear-gradient(180deg, #243b49, #172b39);
+    color: var(--texto-claro);
+    font: inherit;
+
+    box-shadow:
+        inset 0 1px 6px rgba(0, 0, 0, .35),
+        0 0 10px rgba(100, 182, 201, .12);
+}
+
+.interfaz-naval input::placeholder {
+    color: #a7b9cb;
+    opacity: 1;
+}
+
+.interfaz-naval select option {
+    background: #172b39;
+    color: var(--texto-claro);
+}
+
+.interfaz-naval input:focus,
+.interfaz-naval select:focus {
+    border-color: var(--oro);
+    box-shadow: 0 0 0 3px rgba(223, 197, 139, .15);
+}
+
+/* Colores del autocompletado del navegador */
+
+.interfaz-naval input:-webkit-autofill,
+.interfaz-naval input:-webkit-autofill:hover,
+.interfaz-naval input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #f3efe2;
+    caret-color: #f3efe2;
+    -webkit-box-shadow: 0 0 0 1000px #1c3040 inset;
+}
+
+/* Botones: mantienen el acento de cada organización */
+
+.interfaz-naval button,
+.interfaz-naval .boton {
+    display: block;
+    width: 100%;
+    min-height: 48px;
+    margin-top: 26px;
+    padding: 12px 16px;
+
+    border: 1px solid var(--oro);
+    border-radius: 5px;
+    outline: 1px solid rgba(223, 197, 139, .25);
+    outline-offset: 3px;
+
+    background: linear-gradient(
+        180deg,
+        var(--acento),
+        var(--acento-osc)
+    );
+
+    color: #fff;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: .08em;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+
+    box-shadow: inset 0 0 0 3px rgba(0, 0, 0, .2);
+    transition: filter .2s, transform .15s;
+}
+
+.interfaz-naval.tema-gobierno button,
+.interfaz-naval.tema-gobierno .boton {
+    background: linear-gradient(180deg, #dfc58b, #b8901f);
+    color: #1b2233;
+}
+
+.interfaz-naval button:hover,
+.interfaz-naval .boton:hover {
+    filter: brightness(1.12);
+}
+
+.interfaz-naval button:active,
+.interfaz-naval .boton:active {
+    transform: translateY(1px);
+}
+
+.interfaz-naval button.boton-salir {
+    background: linear-gradient(180deg, #9c1c24, #65131a);
+    color: #fff;
+}
+
+/* Enlaces */
+
+.interfaz-naval .enlace-extra {
+    margin: 24px 0 0;
+    padding-top: 18px;
+    border-top: 1px solid rgba(223, 197, 139, .18);
+    color: var(--texto-secundario);
+    font-size: .82rem;
+    text-align: center;
+}
+
+.interfaz-naval .enlace-extra a {
+    color: var(--oro);
+    font-weight: 600;
+    text-underline-offset: 3px;
+}
+
+/* Identidad del usuario */
+
+.interfaz-naval .centro {
+    color: var(--texto-secundario);
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+.interfaz-naval .centro strong {
+    color: var(--oro);
+}
+
+.interfaz-naval .insignia {
+    display: inline-block;
+    padding: 5px 14px;
+    border: 1px solid var(--oro);
+    border-radius: 20px;
+    background: var(--acento-osc);
+    color: var(--texto-claro);
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+/* Menú del inicio */
+
+.interfaz-naval .menu {
+    margin: 26px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.interfaz-naval .menu li {
+    margin: 10px 0;
+}
+
+.interfaz-naval .menu a {
+    display: block;
+    position: relative;
+    padding: 12px 36px 12px 14px;
+
+    border: 1px solid #82919a;
+    border-left: 3px solid var(--oro);
+    border-radius: 5px;
+
+    background: linear-gradient(180deg, #223648, #172737);
+    color: var(--texto-claro);
+    font-size: .9rem;
+    font-weight: 600;
+    line-height: 1.5;
+    text-decoration: none;
+
+    transition: background .2s, border-color .2s;
+}
+
+.interfaz-naval .menu a::after {
+    content: "→";
+    position: absolute;
+    right: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--oro);
+}
+
+.interfaz-naval .menu a:hover {
+    border-color: var(--oro);
+    background: #294156;
+}
+
+/* Mensajes */
+
+.interfaz-naval .error {
+    margin-bottom: 14px;
+    padding: 12px 14px;
+    border: 1px solid #d8868c;
+    border-left: 4px solid #d8868c;
+    border-radius: 4px;
+    background: #47222b;
+    color: #ffe1e4;
+    font-size: .85rem;
+    line-height: 1.5;
+}
+
+.interfaz-naval .aviso {
+    margin-bottom: 14px;
+    padding: 12px 14px;
+    border: 1px solid #7bb99b;
+    border-left: 4px solid #7bb99b;
+    border-radius: 4px;
+    background: #193c32;
+    color: #dcf4e7;
+    font-size: .85rem;
+    line-height: 1.5;
+}
+
+/* Foco visible para navegar con teclado */
+
+.interfaz-naval a:focus-visible,
+.interfaz-naval button:focus-visible,
+.interfaz-naval input:focus-visible,
+.interfaz-naval select:focus-visible {
+    outline: 3px solid var(--oro);
+    outline-offset: 4px;
+}
+
+/* Pie */
+
+.interfaz-naval .pie {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 26px 0 0;
+    padding: 12px;
+    border-top: 1px solid rgba(130, 186, 199, .3);
+    background: rgba(4, 13, 27, .8);
+    color: #bbd3dc;
+    font-size: .65rem;
+    line-height: 1.8;
+    letter-spacing: .08em;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+/* Móvil */
+
+@media (max-width: 520px) {
+    body.interfaz-naval {
+        padding: 24px 16px;
+        background-attachment: scroll;
+    }
+
+    .interfaz-naval .acceso-shell {
+        padding: 26px 24px;
+    }
+
+    .interfaz-naval .encabezado h1 {
+        font-size: 1.1rem;
+    }
+
+    .interfaz-naval .expediente h2 {
+        font-size: 1.2rem;
+    }
+
+    .interfaz-naval .pie {
+        font-size: .6rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .interfaz-naval button,
+    .interfaz-naval .boton,
+    .interfaz-naval .menu a {
+        transition: none;
+    }
+}

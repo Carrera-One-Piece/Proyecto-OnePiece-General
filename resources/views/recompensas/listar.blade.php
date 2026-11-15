@@ -67,6 +67,7 @@
                     <span class="cartel-mini__titulo">SE BUSCA</span>
                     <img src="{{ ImagenesRecompensas::cartel($pirata) }}" alt="" loading="lazy"
                          onerror="this.onerror=null;this.src='{{ asset(ImagenesRecompensas::POR_DEFECTO) }}'">
+                         <span class="cartel-mini__condicion">VIVO O MUERTO</span>
                     <span class="cartel-mini__nombre">{{ $pirata->Nombre }}</span>
                     @if($pirata->Alias)
                         <span class="cartel-mini__alias">«{{ $pirata->Alias }}»</span>

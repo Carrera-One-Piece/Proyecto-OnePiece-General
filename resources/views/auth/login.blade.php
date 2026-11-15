@@ -1,5 +1,7 @@
 @extends('layouts.auth')
 
+@section('interfaz', 'interfaz-naval')
+
 @section('titulo', 'Identificación')
 
 @section('contenido')

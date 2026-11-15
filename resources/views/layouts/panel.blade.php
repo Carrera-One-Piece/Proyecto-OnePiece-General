@@ -23,6 +23,9 @@
     <link rel="stylesheet" href="{{ asset('css/tema.css') }}">
     <link rel="stylesheet" href="{{ asset('css/panel.css') }}">
     <link rel="stylesheet" href="{{ asset('css/recompensas.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/panel-naval.css') }}?v=1">
+    <link rel="stylesheet" href="{{ asset('css/recompensas-naval.css') }}?v=1">
+    <link rel="stylesheet" href="{{ asset('css/inteligencia-naval.css') }}?v=1">
 </head>
 <body class="panel {{ $usuario->organizacion?->tema() ?? 'tema-marina' }}">
 
@@ -43,6 +46,14 @@
             @can('BITACORA.VER')
                 <a href="{{ route('bitacora.index') }}" @class(['activo' => request()->routeIs('bitacora.*')])>Bitácora</a>
             @endcan
+            @can('INFORMES.VER')
+    <a
+        href="{{ route('inteligencia.reportes.index') }}"
+        @class(['activo' => request()->routeIs('inteligencia.*')])
+    >
+        Inteligencia
+    </a>
+@endcan
         </nav>
 
         <div class="barra__usuario">
