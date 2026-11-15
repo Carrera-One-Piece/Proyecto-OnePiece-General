@@ -1,5 +1,8 @@
+const bounds = [[0, 0], [1000, 1600]];
 const map = L.map('map', { crs: L.CRS.Simple, minZoom: -3, maxZoom: 3 });
-map.fitBounds([[0,0],[1000,1600]]);
+
+L.imageOverlay('/img/mapa-onepiece.png', bounds).addTo(map);
+map.fitBounds(bounds);
 
 fetch('/api/islas')
   .then(r => r.json())
