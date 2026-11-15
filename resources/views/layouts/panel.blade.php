@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="{{ asset('css/panel-naval.css') }}?v=1">
     <link rel="stylesheet" href="{{ asset('css/recompensas-naval.css') }}?v=1">
     <link rel="stylesheet" href="{{ asset('css/inteligencia-naval.css') }}?v=1">
+    @stack('estilos')
 </head>
 <body class="panel {{ $usuario->organizacion?->tema() ?? 'tema-marina' }}">
 
@@ -36,6 +37,9 @@
 
         <nav class="barra__menu" aria-label="Menú principal">
             <a href="{{ route('inicio') }}" @class(['activo' => request()->routeIs('inicio')])>Inicio</a>
+            @can('NAVEGACION.VER')
+                <a href="{{ route('mapa') }}" @class(['activo' => request()->routeIs('mapa')])>Mapa</a>
+            @endcan
             @can('RECOMPENSAS.VER')
                 <a href="{{ route('recompensas.index') }}" @class(['activo' => request()->routeIs('recompensas.*')])>Recompensas</a>
             @endcan
@@ -91,5 +95,6 @@
     <p class="pie">Información clasificada · Uso exclusivo del personal autorizado</p>
 
     <script src="{{ asset('js/berries.js') }}"></script>
+    @stack('scripts')
 </body>
 </html>

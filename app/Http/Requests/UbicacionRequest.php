@@ -42,6 +42,8 @@ class UbicacionRequest extends FormRequest
             'id'   => ['required', 'integer'],
             'x'    => ['required', 'numeric', 'between:' . self::X_MIN . ',' . self::X_MAX],
             'y'    => ['required', 'numeric', 'between:' . self::Y_MIN . ',' . self::Y_MAX],
+            // Opcional: la isla donde quedó (cuando se elige una isla en el mapa).
+            'isla' => ['nullable', 'integer', 'exists:isla,ID_isla'],
         ];
 
         $tipo = $this->route('tipo');
@@ -65,6 +67,7 @@ class UbicacionRequest extends FormRequest
             'x.between'  => 'La coordenada X está fuera del mapa.',
             'y.between'  => 'La coordenada Y está fuera del mapa.',
             'id.exists'  => 'La entidad indicada no existe.',
+            'isla.exists' => 'La isla indicada no existe.',
         ];
     }
 }

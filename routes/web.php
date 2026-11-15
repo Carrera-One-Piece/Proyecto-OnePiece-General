@@ -9,6 +9,7 @@ use App\Http\Controllers\BitacoraController;
 use App\Http\Controllers\ConsultaRecompensaController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\MapaController;
+use App\Http\Controllers\NavegacionController;
 use App\Http\Controllers\RecompensaController;
 use App\Http\Controllers\RolPermisoController;
 use App\Http\Controllers\UbicacionController;
@@ -19,7 +20,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/mapa', [MapaController::class, 'index']);
 
 /*
 |--------------------------------------------------------------------------
@@ -118,14 +118,31 @@ Route::middleware('auth')->group(function () {
         ->whereNumber('id')->middleware('permiso:TRIPULACIONES.EDITAR')->name('tripulaciones.update');
     Route::delete('/tripulaciones/{id}', [TripulacionController::class, 'destroy'])
         ->whereNumber('id')->middleware('permiso:TRIPULACIONES.EDITAR')->name('tripulaciones.destroy');
-    // Módulo Navegación (RF11-RF12).
+    // Módulo Navegación (RF10-RF12).
+    // Mapa navegable: islas, tripulaciones, rutas y eventos. Quien tenga
+    // NAVEGACION.EDITAR puede ubicar tripulaciones y barcos desde el mapa.
+    Route::get('/mapa', [MapaController::class, 'index'])
+        ->middleware('permiso:NAVEGACION.VER')->name('mapa');
+    Route::get('/mapa/datos', [MapaController::class, 'datos'])
+        ->middleware('permiso:NAVEGACION.VER')->name('mapa.datos');
+
+    // Endpoints JSON de Navegación: rutas entre islas, recorridos y predicciones.
+    Route::get('/navegacion/conexiones', [NavegacionController::class, 'conexiones'])
+        ->middleware('permiso:NAVEGACION.VER')->name('navegacion.conexiones');
+    Route::get('/navegacion/recorridos/{tipo}/{id}', [NavegacionController::class, 'recorrido'])
+        ->whereNumber('id')->middleware('permiso:NAVEGACION.VER')->name('navegacion.recorrido');
+    Route::get('/navegacion/predicciones', [NavegacionController::class, 'predicciones'])
+        ->middleware('permiso:NAVEGACION.VER')->name('navegacion.predicciones');
+    Route::post('/navegacion/predicciones', [NavegacionController::class, 'predecir'])
+        ->middleware('permiso:NAVEGACION.CREAR')->name('navegacion.predecir');
+
     // Página de prueba de Karen: se deja tal cual, solo para validar a ojo.
     Route::view('/ubicaciones/prueba', 'ubicaciones.prueba')
         ->middleware('permiso:NAVEGACION.VER');
 
     // Reemplaza el cierre provisional de Karen por el controller real.
     Route::put('/ubicaciones/{tipo}/{id}', [UbicacionController::class, 'actualizar'])
-        ->middleware('permiso:NAVEGACION.EDITAR');
+        ->middleware('permiso:NAVEGACION.EDITAR')->name('ubicaciones.actualizar');
 
     // Módulo Eventos (RF13-RF15).
     // Página de prueba para verificar el CRUD a ojo (borrar cuando haya interfaz real).
