@@ -1,0 +1,468 @@
+/* ==========================================================================
+   panel.css — Marco común de las pantallas de adentro (layouts/panel)
+   ==========================================================================
+
+   Lo usan Recompensas, Administrar usuarios, Matriz de permisos y Bitácora.
+   Se carga DESPUÉS de tema.css (el del login) y reutiliza sus variables de
+   color (--acento, --papel, --tinta...). Así todo cambia de color con la
+   organización del usuario, igual que el login.
+
+   ESTRUCTURA
+   1. Barra superior (logo, menú, usuario)
+   2. Hoja principal (más ancha que la del login)
+   3. Botones chicos y campos que tema.css no trae
+   4. Buscador / barra de filtros
+   5. Etiquetas de estado (recompensas y usuarios)
+   6. Tablas y paginación
+   7. Administración: usuarios, pendientes, matriz de permisos, bitácora
+   8. Responsivo
+   ========================================================================== */
+
+:root {
+    --verde: #1e7b34;
+}
+
+body.panel {
+    align-items: stretch;
+    padding: 0 0 40px;
+    /* Las páginas son largas: el fondo "fijo" del login se cortaba al bajar. */
+    background-attachment: scroll;
+}
+
+
+/* ---------- 1. Barra superior ---------- */
+
+.barra {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    padding: 10px 24px;
+    background: rgba(0, 0, 0, .35);
+    border-bottom: 3px solid var(--acento);
+    color: #fff;
+}
+
+.barra__logo {
+    display: block;
+    padding: 4px 12px;
+    background: var(--papel);
+    border-radius: 6px;
+}
+
+.barra__logo img { display: block; height: 42px; width: auto; }
+
+.barra__menu { display: flex; gap: 6px; flex-wrap: wrap; flex: 1; }
+
+.barra__menu a {
+    padding: 8px 14px;
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.barra__menu a:hover,
+.barra__menu a.activo { background: var(--acento); }
+
+.barra__usuario {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: .9rem;
+}
+
+.barra__usuario small { opacity: .7; }
+.barra__usuario form { margin: 0; }
+
+
+/* ---------- 2. Hoja principal ---------- */
+
+.hoja {
+    width: calc(100% - 32px);
+    max-width: 1180px;
+    margin: 28px auto 0;
+    padding: 28px 32px;
+    background: var(--papel);
+    border: 3px solid var(--acento);
+    outline: 1px solid var(--acento);
+    outline-offset: -9px;
+    border-radius: 6px;
+    box-shadow: var(--sombra);
+}
+
+.hoja h2 {
+    margin: 0 0 4px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.6rem;
+    color: var(--acento-osc);
+}
+
+.hoja .subtitulo { margin: 0 0 20px; color: #5b6478; }
+
+.hoja a { color: var(--acento-osc); }
+.hoja a.boton { color: #fff; }
+.hoja a.boton-claro { color: var(--acento-osc); }
+
+.encabezado-seccion {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.vacio { font-style: italic; color: #5b6478; }
+
+
+/* ---------- 3. Botones chicos y campos ---------- */
+
+/* tema.css pone los botones a todo lo ancho; aquí hacen falta en línea. */
+.boton-chico {
+    display: inline-block;
+    width: auto;
+    margin: 0;
+    padding: 8px 16px;
+    font-size: .8rem;
+    letter-spacing: .1em;
+}
+
+.boton-claro {
+    color: var(--acento-osc);
+    background: #fff;
+    border: 1px solid #b9b39e;
+}
+
+.boton-peligro { background: linear-gradient(180deg, #a4161a, #6d0f12); }
+
+input[type="number"],
+input[type="search"],
+textarea {
+    width: 100%;
+    padding: 11px 12px;
+    font: inherit;
+    font-size: 1rem;
+    color: var(--tinta);
+    background: #fff;
+    border: 1px solid #b9b39e;
+    border-radius: 4px;
+}
+
+textarea { min-height: 90px; resize: vertical; }
+
+textarea:focus { outline: none; border-color: var(--acento); }
+
+.ayuda { margin: 4px 0 0; font-size: .8rem; color: #5b6478; }
+
+.formulario { max-width: 620px; }
+
+.formulario .botones { display: flex; gap: 10px; margin-top: 24px; }
+.formulario .botones > * { flex: 1; margin: 0; }
+
+
+/* ---------- 4. Buscador ---------- */
+
+.buscador {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr auto;
+    gap: 12px;
+    align-items: end;
+    margin: 18px 0 8px;
+    padding: 14px 16px;
+    background: #fff;
+    border: 1px solid #d8d1bb;
+    border-radius: 6px;
+}
+
+.buscador--5 { grid-template-columns: 2fr 1.5fr 1fr 1fr auto; }
+
+.buscador label { margin-top: 0; }
+.buscador .botones { display: flex; gap: 8px; }
+.buscador .botones .boton-chico { padding: 11px 16px; }
+
+.resultados { margin: 10px 0 16px; font-size: .88rem; color: #5b6478; }
+
+
+/* ---------- 5. Etiquetas de estado ---------- */
+
+.estado {
+    display: inline-block;
+    padding: 2px 10px;
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    color: #fff;
+    background: #6b6b6b;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
+.estado--activa    { background: var(--verde); }
+.estado--capturado { background: #b8721f; }
+.estado--muerto    { background: #a4161a; }
+
+/* Usuarios (columna Estado de la tabla usuarios) */
+.estado--activo     { background: var(--verde); }
+.estado--pendiente  { background: #b8721f; }
+.estado--suspendido { background: #a4161a; }
+.estado--inactivo   { background: #6b6b6b; }
+
+/* Bitácora: un color por tipo de acción */
+.estado--ok       { background: var(--verde); }
+.estado--alerta   { background: #a4161a; }
+.estado--cambio   { background: var(--acento); }
+.estado--neutro   { background: #6b6b6b; }
+
+
+/* ---------- 6. Tablas y paginación ---------- */
+
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border: 1px solid #d8d1bb;
+}
+
+.tabla th,
+.tabla td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid #e6e0cc;
+    vertical-align: middle;
+}
+
+.tabla th {
+    font-size: .75rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--acento-osc);
+}
+
+.tabla .numero { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+.tabla tfoot td { font-weight: 700; background: #f8f6ee; }
+
+.tabla img.mini {
+    width: 44px;
+    height: 44px;
+    object-fit: cover;
+    border-radius: 50%;
+    background: #e4dcc4;
+}
+
+/* Paginación de Laravel ($piratas->links('pagination::default')) */
+.pagination {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: center;
+    margin: 22px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.pagination li > * {
+    display: block;
+    min-width: 36px;
+    padding: 6px 10px;
+    text-align: center;
+    text-decoration: none;
+    background: #fff;
+    border: 1px solid #b9b39e;
+    border-radius: 4px;
+}
+
+.pagination .active > * { color: #fff; background: var(--acento); border-color: var(--acento); }
+.pagination .disabled > * { opacity: .45; }
+
+
+
+/* ---------- 7. Administración ---------- */
+
+/* Burbuja con un número (ej.: cuántos pendientes hay) */
+.contador {
+    display: inline-block;
+    min-width: 22px;
+    margin-left: 6px;
+    padding: 1px 7px;
+    font-size: .75rem;
+    font-weight: 700;
+    text-align: center;
+    color: #fff;
+    background: #b8721f;
+    border-radius: 20px;
+}
+
+.contador--cero { background: #9a9a9a; }
+
+/* Celda con nombre + correo debajo */
+.persona strong { display: block; }
+.persona small { color: #5b6478; }
+.persona .usted { margin-left: 6px; font-size: .7rem; color: var(--acento); font-weight: 700; }
+
+/* Botones de una fila de la tabla, uno al lado del otro */
+.fila-acciones { display: flex; gap: 6px; flex-wrap: wrap; }
+.fila-acciones form { margin: 0; }
+.fila-acciones .boton-chico { padding: 6px 12px; font-size: .72rem; }
+
+/* Tarjetas de usuarios pendientes */
+.tarjetas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.tarjeta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    height: 100%;
+    padding: 14px 16px;
+    background: #fff;
+    border: 1px solid #d8d1bb;
+    border-left: 4px solid #b8721f;
+    border-radius: 4px;
+}
+
+.tarjeta__nombre { font-weight: 700; font-size: 1.05rem; }
+.tarjeta__dato { font-size: .88rem; color: #5b6478; }
+.tarjeta .fila-acciones { margin-top: auto; padding-top: 10px; }
+
+/* Ficha del usuario a aprobar */
+.ficha-usuario {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.ficha-usuario .panel-blanco { margin: 0; }
+
+.panel-blanco {
+    margin: 0 0 18px;
+    padding: 16px 18px;
+    background: #fff;
+    border: 1px solid #d8d1bb;
+    border-radius: 6px;
+}
+
+.panel-blanco h3 {
+    margin: 0 0 10px;
+    font-size: .9rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--acento-osc);
+}
+
+/* Matriz de permisos: los roles como pestañas */
+.pestanas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0 0 18px;
+    padding: 0;
+    list-style: none;
+}
+
+.pestanas a {
+    display: block;
+    padding: 8px 14px;
+    font-size: .85rem;
+    font-weight: 600;
+    text-decoration: none;
+    background: #fff;
+    border: 1px solid #b9b39e;
+    border-radius: 20px;
+}
+
+.pestanas a:hover { background: #f8f6ee; }
+
+.hoja .pestanas a.activo {
+    color: #fff;
+    background: var(--acento);
+    border-color: var(--acento);
+}
+
+.pestanas small { margin-left: 4px; opacity: .7; }
+
+.matriz td,
+.matriz th { text-align: center; }
+
+.matriz td:first-child,
+.matriz th:first-child { text-align: left; }
+
+.matriz .codigo {
+    display: block;
+    font-family: Consolas, monospace;
+    font-size: .72rem;
+    color: #5b6478;
+}
+
+/* Casilla grande y con el color del tema */
+.matriz input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--acento);
+    cursor: pointer;
+}
+
+.matriz input[type="checkbox"]:disabled { cursor: not-allowed; }
+
+.matriz .no-aplica { color: #b9b39e; }
+
+.barra-guardar {
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-top: 16px;
+    padding: 12px 0;
+    background: var(--papel);
+    /* Se queda pegada abajo al bajar por la tabla: la sombra la separa de las filas. */
+    box-shadow: 0 -8px 12px -8px rgba(0, 0, 0, .25);
+}
+
+.barra-guardar p { margin: 0; font-size: .85rem; color: #5b6478; }
+.barra-guardar button { width: auto; margin: 0; padding: 11px 28px; }
+
+/* Bitácora */
+.bitacora .fecha { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.bitacora .detalle { font-size: .88rem; }
+.bitacora .ip { font-family: Consolas, monospace; font-size: .8rem; color: #5b6478; }
+
+input[type="date"] {
+    width: 100%;
+    padding: 10px 12px;
+    font: inherit;
+    color: var(--tinta);
+    background: #fff;
+    border: 1px solid #b9b39e;
+    border-radius: 4px;
+}
+
+
+/* ---------- 8. Responsivo ---------- */
+
+@media (max-width: 860px) {
+    .ficha-usuario { grid-template-columns: 1fr; }
+    .buscador { grid-template-columns: 1fr 1fr; }
+    .buscador .campo-texto { grid-column: 1 / -1; }
+}
+
+@media (max-width: 560px) {
+    .barra { padding: 10px 16px; gap: 10px; }
+    .barra__menu { order: 3; flex-basis: 100%; }
+    .barra__menu a { padding: 6px 10px; }
+    .barra__usuario { margin-left: auto; }
+    .barra__usuario small { display: none; }
+    .hoja { width: calc(100% - 16px); padding: 20px 16px; }
+    .buscador { grid-template-columns: 1fr; }
+    .tabla { display: block; overflow-x: auto; }
+}

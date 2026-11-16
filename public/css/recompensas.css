@@ -1,0 +1,288 @@
+/* ==========================================================================
+   recompensas.css — Lo propio del módulo de Recompensas
+   ==========================================================================
+
+   La barra, la hoja, las tablas y los botones están en panel.css.
+   Aquí solo van los carteles de "SE BUSCA".
+
+   ESTRUCTURA
+   1. Tablón: tarjetas de "SE BUSCA" pequeñas
+   2. Ficha del pirata: cartel grande + datos
+   3. Página de la tripulación
+   4. Responsivo
+   ========================================================================== */
+
+:root {
+    --pergamino:   #efe2bf;
+    --pergamino-2: #e2cf9f;
+    --cafe:        #4a3216;
+}
+
+
+/* ---------- 1. Tablón ---------- */
+
+.tablon {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 18px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.cartel-mini {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 10px 12px 12px;
+    color: var(--cafe);
+    text-align: center;
+    text-decoration: none;
+    background: linear-gradient(180deg, var(--pergamino), var(--pergamino-2));
+    border: 1px solid #b59a5e;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, .18);
+    transition: transform .15s, box-shadow .15s;
+}
+
+.hoja a.cartel-mini { color: var(--cafe); }
+
+.cartel-mini:hover {
+    transform: translateY(-3px) rotate(-.4deg);
+    box-shadow: 0 10px 18px rgba(0, 0, 0, .25);
+}
+
+.cartel-mini__titulo {
+    font-family: Georgia, serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: .25em;
+}
+
+.cartel-mini img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    margin: 6px 0;
+    background: #e4dcc4;
+    border: 2px solid var(--cafe);
+}
+
+.cartel-mini__nombre {
+    font-family: Georgia, serif;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.cartel-mini__alias { font-size: .8rem; font-style: italic; }
+
+.cartel-mini__valor {
+    margin-top: auto;
+    padding-top: 6px;
+    font-family: Georgia, serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.cartel-mini__tripulacion { font-size: .75rem; opacity: .8; }
+
+
+/* ---------- 2. Ficha del pirata ---------- */
+
+.ficha {
+    display: grid;
+    grid-template-columns: minmax(260px, 360px) 1fr;
+    gap: 32px;
+    align-items: start;
+}
+
+.cartel {
+    position: relative;
+    padding: 18px 20px 22px;
+    color: var(--cafe);
+    text-align: center;
+    background:
+        radial-gradient(ellipse at center, transparent 55%, rgba(110, 70, 20, .25)),
+        linear-gradient(180deg, var(--pergamino), var(--pergamino-2));
+    border: 1px solid #a88b4e;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, .3);
+}
+
+.cartel__titulo {
+    margin: 0;
+    font-family: Georgia, serif;
+    font-size: 2.6rem;
+    font-weight: 700;
+    letter-spacing: .2em;
+    line-height: 1;
+}
+
+.cartel__foto {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    margin: 12px 0 8px;
+    background: #e4dcc4;
+    border: 3px solid var(--cafe);
+}
+
+.cartel__condicion {
+    font-family: Georgia, serif;
+    font-size: .95rem;
+    font-weight: 700;
+    letter-spacing: .3em;
+}
+
+.cartel__nombre {
+    margin: 6px 0 0;
+    font-family: Georgia, serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1.1;
+}
+
+.cartel__valor {
+    margin: 8px 0 0;
+    font-family: Georgia, serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    word-break: break-word;
+}
+
+.cartel__marina {
+    margin-top: 8px;
+    font-size: .7rem;
+    letter-spacing: .35em;
+    text-transform: uppercase;
+}
+
+/* Sello rojo cruzado cuando la recompensa está cancelada. */
+.cartel__sello {
+    position: absolute;
+    top: 42%;
+    left: 50%;
+    padding: 6px 16px;
+    font-family: Georgia, serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: .15em;
+    color: #a4161a;
+    background: rgba(239, 226, 191, .85);
+    border: 4px double #a4161a;
+    transform: translate(-50%, -50%) rotate(-14deg);
+    white-space: nowrap;
+}
+
+.datos {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 8px 18px;
+    margin: 0 0 20px;
+}
+
+.datos dt {
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--acento-osc);
+    padding-top: 3px;
+}
+
+.datos dd { margin: 0; }
+
+.grupo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 0 0 20px;
+    padding: 12px;
+    background: #fff;
+    border: 1px solid #d8d1bb;
+    border-radius: 6px;
+}
+
+.grupo img {
+    width: 84px;
+    height: 84px;
+    object-fit: contain;
+    background: #e4dcc4;
+    border-radius: 4px;
+}
+
+.grupo__nombre { font-weight: 700; font-size: 1.05rem; }
+.grupo__rol { font-size: .85rem; color: #5b6478; }
+
+.acciones {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+    margin: 0 0 8px;
+}
+
+.acciones .panel {
+    padding: 12px 14px 14px;
+    background: #fff;
+    border: 1px solid #d8d1bb;
+    border-top: 4px solid var(--acento);
+    border-radius: 4px;
+}
+
+.acciones .panel--peligro { border-top-color: #a4161a; }
+
+.acciones h3 {
+    margin: 0 0 4px;
+    font-size: .9rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--acento-osc);
+}
+
+.acciones label { margin-top: 8px; }
+.acciones button { margin-top: 12px; padding: 10px; font-size: .8rem; }
+
+.acciones-extra { display: flex; gap: 10px; flex-wrap: wrap; margin: 4px 0 0; }
+.acciones-extra form { margin: 0; }
+
+
+/* ---------- 3. Página de la tripulación ---------- */
+
+.cabecera-tripulacion {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    margin-bottom: 22px;
+}
+
+.cabecera-tripulacion img {
+    width: 160px;
+    height: 160px;
+    object-fit: contain;
+    background: #e4dcc4;
+    border: 3px solid var(--acento-osc);
+    border-radius: 6px;
+}
+
+.total {
+    font-family: Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--acento-osc);
+}
+
+.historial-recompensa__tabla { background: #fff; }
+
+
+/* ---------- 4. Responsivo ---------- */
+
+@media (max-width: 860px) {
+    .ficha { grid-template-columns: 1fr; }
+    .cartel { max-width: 380px; margin: 0 auto; }
+}
+
+@media (max-width: 560px) {
+    .cabecera-tripulacion { flex-direction: column; align-items: flex-start; }
+}

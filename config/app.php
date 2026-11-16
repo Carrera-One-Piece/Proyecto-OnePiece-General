@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'America/Bogota', // hora de Colombia (la bitácora guarda fechas)
 
     /*
     |--------------------------------------------------------------------------

@@ -1,0 +1,317 @@
+/* ==========================================================================
+   tema.css — Estilos de Login, Registro, Pendiente, Inicio y Acceso denegado
+   ==========================================================================
+
+   ESTRUCTURA DE ESTE ARCHIVO
+   1. Variables (colores) y los 3 temas por organización
+   2. Base de la página (fondo, tipografía)
+   3. Encabezado con emblema
+   4. Tarjeta principal ("expediente")
+   5. Formularios y botones
+   6. Mensajes de error y sello de "pendiente"
+   7. Responsivo (pantallas pequeñas)
+
+   IDEA CLAVE: cada tema solo redefine 4 variables de color (--acento,
+   --acento-osc, --fondo-1, --fondo-2). Todo lo demás (tarjeta, botones,
+   bordes) usa esas variables, así que cambiar de tema no requiere tocar
+   el resto del CSS.
+   ========================================================================== */
+
+
+/* ---------- 1. Variables y temas ---------- */
+
+:root {
+    --papel:      #f3efe2;   /* color del "documento" */
+    --tinta:      #1b2233;   /* texto principal */
+    --error:      #9c1c24;
+    --sombra:     0 18px 50px rgba(0, 0, 0, .55);
+
+    /* Tema por defecto = Marina */
+    --acento:     #1f4f9c;
+    --acento-osc: #123268;
+    --fondo-1:    #06152e;
+    --fondo-2:    #0e2b57;
+}
+
+/* Marina: azul profundo, "Justicia Absoluta" */
+body.tema-marina {
+    --acento: #1f4f9c; --acento-osc: #123268;
+    --fondo-1: #06152e; --fondo-2: #0e2b57;
+}
+
+/* Cipher Pol: negro y carmesí, discreción y secreto */
+body.tema-cp {
+    --acento: #a3262a; --acento-osc: #6d1519;
+    --fondo-1: #050506; --fondo-2: #1a1a20;
+}
+
+/* Gobierno Afiliado: marfil y oro */
+body.tema-gobierno {
+    --acento: #b8901f; --acento-osc: #7c5f10;
+    --fondo-1: #2a2416; --fondo-2: #4a3f22;
+}
+
+
+/* ---------- 2. Base ---------- */
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 16px 48px;
+    color: var(--tinta);
+    font-family: "Segoe UI", system-ui, sans-serif;
+    /* Fondo: degradado + líneas horizontales suaves que recuerdan las
+       olas del mar. Se logra solo con CSS, sin imágenes externas. */
+    background:
+        repeating-linear-gradient(
+            180deg,
+            rgba(255, 255, 255, .025) 0 2px,
+            transparent 2px 22px
+        ),
+        linear-gradient(160deg, var(--fondo-1), var(--fondo-2));
+    background-attachment: fixed;
+    transition: background .4s;
+}
+
+
+/* ---------- 3. Encabezado con emblema ---------- */
+
+.encabezado {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 22px;
+}
+
+.emblema {
+    width: 76px;
+    height: 76px;
+    color: #fff;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, .5));
+}
+
+.encabezado h1 {
+    margin: 10px 0 2px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.6rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+}
+
+.encabezado .lema {
+    margin: 0;
+    font-size: .8rem;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    opacity: .75;
+}
+
+
+/* ---------- 4. Tarjeta principal ---------- */
+
+.expediente {
+    width: 100%;
+    max-width: 460px;
+    background: var(--papel);
+    border-radius: 6px;
+    padding: 30px 32px 26px;
+    box-shadow: var(--sombra);
+    /* Doble borde: uno interior fino y otro exterior grueso, con el
+       color de acento del tema, como el marco de un documento oficial. */
+    border: 3px solid var(--acento);
+    outline: 1px solid var(--acento);
+    outline-offset: -9px;
+    position: relative;
+}
+
+.expediente h2 {
+    margin: 0 0 4px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.35rem;
+    color: var(--acento-osc);
+    text-align: center;
+}
+
+.expediente .subtitulo {
+    margin: 0 0 22px;
+    text-align: center;
+    font-size: .85rem;
+    color: #5b6478;
+}
+
+.expediente p { line-height: 1.55; }
+
+
+/* ---------- 5. Formularios y botones ---------- */
+
+label {
+    display: block;
+    margin: 14px 0 5px;
+    font-size: .78rem;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--acento-osc);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+    width: 100%;
+    padding: 11px 12px;
+    font-size: 1rem;
+    color: var(--tinta);
+    background: #fff;
+    border: 1px solid #b9b39e;
+    border-radius: 4px;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: var(--acento);
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, .12);
+}
+
+.descripcion-org {
+    margin: 6px 0 0;
+    font-size: .8rem;
+    font-style: italic;
+    color: #5b6478;
+}
+
+button,
+.boton {
+    display: block;
+    width: 100%;
+    margin-top: 24px;
+    padding: 13px;
+    text-align: center;
+    text-decoration: none;
+    font-size: .95rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: #fff;
+    background: linear-gradient(180deg, var(--acento), var(--acento-osc));
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: filter .2s, transform .1s;
+}
+
+button:hover, .boton:hover { filter: brightness(1.15); }
+button:active, .boton:active { transform: translateY(1px); }
+
+.enlace-extra {
+    margin: 20px 0 0;
+    text-align: center;
+    font-size: .88rem;
+}
+
+.enlace-extra a {
+    color: var(--acento-osc);
+    font-weight: 600;
+}
+
+
+/* ---------- 6. Errores y sello ---------- */
+
+.error {
+    margin: 0 0 6px;
+    padding: 10px 14px;
+    color: var(--error);
+    background: #f8e3e4;
+    border-left: 4px solid var(--error);
+    border-radius: 3px;
+    font-size: .9rem;
+}
+
+.error ul { margin: 0; padding-left: 18px; }
+
+/* Sello rotado de "PENDIENTE" en la pantalla de espera */
+.sello {
+    display: inline-block;
+    margin: 6px auto 18px;
+    padding: 6px 22px;
+    font-family: Georgia, serif;
+    font-size: 1.5rem;
+    letter-spacing: .25em;
+    color: var(--error);
+    border: 3px double var(--error);
+    border-radius: 4px;
+    transform: rotate(-6deg);
+    opacity: .85;
+}
+
+.centro { text-align: center; }
+
+.insignia {
+    display: inline-block;
+    padding: 3px 12px;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--acento);
+    border-radius: 20px;
+}
+
+.pie {
+    margin-top: 26px;
+    font-size: .72rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, .45);
+    text-align: center;
+}
+
+
+/* ---------- 7. Responsivo ---------- */
+
+@media (max-width: 520px) {
+    .expediente { padding: 24px 20px 20px; }
+    .encabezado h1 { font-size: 1.25rem; }
+}
+
+
+/* ---------- 8. Menú de la pantalla de inicio ---------- */
+
+.menu {
+    list-style: none;
+    margin: 18px 0 0;
+    padding: 0;
+}
+
+.menu li { margin: 8px 0; }
+
+.menu a {
+    display: block;
+    padding: 10px 14px;
+    color: var(--acento-osc);
+    font-weight: 600;
+    text-decoration: none;
+    background: #fff;
+    border: 1px solid #b9b39e;
+    border-left: 4px solid var(--acento);
+    border-radius: 4px;
+}
+
+.menu a:hover { background: #f8f6ee; }
+
+.aviso {
+    margin: 0 0 6px;
+    padding: 10px 14px;
+    color: #1e4d2b;
+    background: #e3f1e6;
+    border-left: 4px solid #2e7d45;
+    border-radius: 3px;
+    font-size: .9rem;
+}
